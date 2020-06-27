@@ -15,5 +15,5 @@
     "default_title": "Detect <img> that cause Layout Shift"
   },
 
-  "permissions": []
+  "permissions": ["activeTab"]
 }

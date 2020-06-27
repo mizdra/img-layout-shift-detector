@@ -7,7 +7,8 @@ const distPath = resolve(__dirname, './dist');
 /** @type import('webpack').ConfigurationFactory */
 module.exports = (env, argv) => ({
   entry: {
-    popup: [resolve(srcPath, './popup.ts')],
+    popup: [resolve(srcPath, './popup/popup.ts')],
+    content: [resolve(srcPath, './content/content.ts')],
   },
   output: {
     path: distPath,
