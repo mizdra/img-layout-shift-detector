@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "img-layout-shift-detector",
+  "description": "The browser extension that detects `<img>` tags that cause Layout Shift",
+  "version": "0.0.1",
+  "browser_specific_settings": {
+    "gecko": {
+      "strict_min_version": "58.0"
+    }
+  },
+
+  "browser_action": {
+    "default_icon": "static/icon.svg",
+    "default_popup": "popup.html",
+    "default_title": "Detect <img> that cause Layout Shift"
+  },
+
+  "permissions": []
+}
