@@ -9,8 +9,7 @@
     "dev": "webpack-dev-server --mode development",
     "check": "run-p -l -c 'check:tsc --pretty' 'check:eslint --color' check:prettier",
     "check:tsc": "tsc --noEmit",
-    "check:eslint": "eslint --format codeframe 'src/**/*.{ts,tsx}'",
-    "check:prettier": "prettier --check 'src/**/*.{ts,tsx}'"
+    "check:eslint": "eslint --format codeframe 'src/**/*.{ts,tsx}'"
   },
   "repository": {
     "type": "git",
