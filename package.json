@@ -1,7 +1,7 @@
 {
   "name": "img-layout-shift-detector",
   "version": "0.0.0",
-  "description": "",
+  "description": "The browser extension that detects `<img>` tags that cause Layout Shift",
   "main": "index.js",
   "scripts": {
     "start": "yarn run dev",
