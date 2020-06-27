@@ -1,5 +1,5 @@
 {
-  "name": "webpack-ts-skeleton",
+  "name": "img-layout-shift-detector",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mizdra/webpack-ts-skeleton.git"
+    "url": "git+https://github.com/mizdra/img-layout-shift-detector.git"
   },
   "author": "mizdra",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mizdra/webpack-ts-skeleton/issues"
+    "url": "https://github.com/mizdra/img-layout-shift-detector/issues"
   },
-  "homepage": "https://github.com/mizdra/webpack-ts-skeleton#readme",
+  "homepage": "https://github.com/mizdra/img-layout-shift-detector#readme",
   "dependencies": {
     "@material-ui/core": "^4.10.2",
     "@material-ui/icons": "^4.9.1",
