@@ -21,14 +21,7 @@
     "url": "https://github.com/mizdra/img-layout-shift-detector/issues"
   },
   "homepage": "https://github.com/mizdra/img-layout-shift-detector#readme",
-  "dependencies": {
-    "@material-ui/core": "^4.10.2",
-    "@material-ui/icons": "^4.9.1",
-    "@types/react": "^16.9.41",
-    "@types/react-dom": "^16.9.8",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@mizdra/eslint-config-mizdra": "^0.4.0",
     "@types/webpack": "^4.41.18",
@@ -38,15 +31,11 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-react": "^7.20.0",
-    "eslint-plugin-react-hooks": "^4.0.4",
-    "html-webpack-plugin": "^4.3.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.5",
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.5",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-cli": "^3.3.12"
   }
 }
