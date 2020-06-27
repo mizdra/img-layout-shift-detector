@@ -1,0 +1,4 @@
+{
+  "extends": ["github>hatena/renovate-config"],
+  "ignorePresets": ["github>hatena/renovate-config:schedule"]
+}
