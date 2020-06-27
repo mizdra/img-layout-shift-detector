@@ -4,12 +4,15 @@
   "description": "The browser extension that detects `<img>` tags that cause Layout Shift",
   "main": "index.js",
   "scripts": {
-    "start": "yarn run dev",
+    "start": "web-ext run --target=firefox-desktop --target=chromium",
+    "start:firefox": "web-ext run --target=firefox-desktop",
+    "start:chromium": "web-ext run --target=chromium",
     "build": "webpack --mode production",
     "dev": "webpack --watch --mode development",
     "check": "run-p -l -c 'check:tsc --pretty' 'check:eslint --color' check:prettier",
     "check:tsc": "tsc --noEmit",
-    "check:eslint": "eslint --format codeframe 'src/**/*.{ts,tsx}'"
+    "check:eslint": "eslint --format codeframe 'src/**/*.{ts,tsx}'",
+    "check:web-ext": "web-ext lint"
   },
   "repository": {
     "type": "git",
@@ -35,6 +38,7 @@
     "prettier": "^2.0.5",
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.5",
+    "web-ext": "^4.3.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"
   }
