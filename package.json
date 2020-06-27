@@ -24,7 +24,9 @@
     "url": "https://github.com/mizdra/img-layout-shift-detector/issues"
   },
   "homepage": "https://github.com/mizdra/img-layout-shift-detector#readme",
-  "dependencies": {},
+  "dependencies": {
+    "webextension-polyfill-ts": "^0.18.0"
+  },
   "devDependencies": {
     "@mizdra/eslint-config-mizdra": "^0.4.0",
     "@types/webpack": "^4.41.18",
