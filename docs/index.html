@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Playground for img-layout-shift-detector</title>
+    <style>
+      img {
+        border: 4px solid #333;
+        box-sizing: border-box;
+        display: block;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="width: 400px;">
+      <h2>missing aspect ratio hint</h2>
+      <img src="https://placehold.jp/200x100.png" width="100%" height="auto" />
+      <img src="https://placehold.jp/200x100.png" style="width: 100%; height: auto;" />
+      <img src="https://placehold.jp/200x100.png" width="auto" height="auto" />
+
+      <h2>incorrect aspect ratio</h2>
+      <img src="https://placehold.jp/200x100.png" width="100" height="100" />
+      <img src="https://placehold.jp/200x100.png" style="width: 100px; height: 100px;" />
+      <img src="https://placehold.jp/200x100.png" width="100" height="100" style="width: 100%; height: auto;" />
+
+      <h2>missing all size attrs or props</h2>
+      <img src="https://placehold.jp/200x100.png" />
+
+      <h2>missing one side attr</h2>
+      <img src="https://placehold.jp/200x100.png" width="100" style="width: 100%; height: auto;" />
+      <img src="https://placehold.jp/200x100.png" width="100" style="height: 50px;" />
+      <img src="https://placehold.jp/200x100.png" width="100" />
+
+      <h2>missing one side prop</h2>
+      <img src="https://placehold.jp/200x100.png" width="100" height="50" style="width: 100%;" />
+      <img src="https://placehold.jp/200x100.png" width="100" style="height: 50px;" />
+      <img src="https://placehold.jp/200x100.png" style="width: 100px;" />
+    </div>
+  </body>
+</html>

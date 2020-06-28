@@ -9,6 +9,10 @@ The browser extension that detects `<img>` tags that cause Layout Shift
 1. Click the icon of this extension
 1. The report is outputed to console tab
 
+## Playground
+
+- https://mizdra.github.io/img-layout-shift-detector/
+
 ## Screenshots
 
 ![Screenshot](./static/screenshot.png?raw=true)
