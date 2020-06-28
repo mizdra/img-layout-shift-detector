@@ -9,13 +9,63 @@ The browser extension that detects `<img>` tags that cause Layout Shift
 1. Click the icon of this extension
 1. The report is outputed to console tab
 
-## Playground
-
-- https://mizdra.github.io/img-layout-shift-detector/
-
 ## Screenshots
 
 ![Screenshot](./static/screenshot.png?raw=true)
+
+## Available rules
+
+### `missing-aspect-ratio-hint`
+
+:no_good: Examples of **incorrect** code for this rule:
+
+```html
+<img src="https://placehold.jp/200x100.png" width="100%" height="auto" />
+<img src="https://placehold.jp/200x100.png" style="width: 100%; height: auto;" />
+<img src="https://placehold.jp/200x100.png" width="auto" height="auto" />
+```
+
+### `incorrect-aspect-ratio`
+
+:no_good: Examples of **incorrect** code for this rule:
+
+```html
+<img src="https://placehold.jp/200x100.png" width="100" height="100" />
+<img src="https://placehold.jp/200x100.png" style="width: 100px; height: 100px;" />
+<img src="https://placehold.jp/200x100.png" width="100" height="100" style="width: 100%; height: auto;" />
+```
+
+### `missing-all-size-attrs-or-props`
+
+:no_good: Examples of **incorrect** code for this rule:
+
+```html
+<img src="https://placehold.jp/200x100.png" />
+```
+
+### `missing-one-side-attr`
+
+:no_good: Examples of **incorrect** code for this rule:
+
+```html
+<img src="https://placehold.jp/200x100.png" width="100" style="width: 100%; height: auto;" />
+<img src="https://placehold.jp/200x100.png" width="100" style="height: 50px;" />
+<img src="https://placehold.jp/200x100.png" width="100" />
+```
+
+### `missing-one-side-prop`
+
+:no_good: Examples of **incorrect** code for this rule:
+
+```html
+<img src="https://placehold.jp/200x100.png" width="100" height="50" style="width: 100%;" />
+<img src="https://placehold.jp/200x100.png" width="100" style="height: 50px;" />
+<img src="https://placehold.jp/200x100.png" style="width: 100px;" />
+```
+
+## Playground
+
+- https://mizdra.github.io/img-layout-shift-detector/
 
 ## How to develop
 
