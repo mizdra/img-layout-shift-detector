@@ -17,6 +17,14 @@ function getAspectRatioFromProps(img: HTMLImageElement): number | null {
   return +width.slice(0, -2) / +height.slice(0, -2);
 }
 
+function getAspectRatioFromComputedStyles(img: HTMLImageElement): number | null {
+  const width = (img as any).computedStyleMap().get('width');
+  const height = (img as any).computedStyleMap().get('height');
+
+  if (width.unit !== 'px' || height.unit !== 'px') return null;
+  return width.value / height.value;
+}
+
 function hasProp(img: HTMLImageElement, propName: keyof CSSStyleDeclaration): boolean {
   return img.style[propName] !== '';
 }
@@ -85,4 +93,36 @@ export function isMissingSizeProp(img: HTMLImageElement): boolean {
   if (hasProp(img, 'width') && hasProp(img, 'height')) return false;
   if (!hasProp(img, 'width') && !hasProp(img, 'height')) return false;
   return true;
+}
+
+export function getSizeInfo(img: HTMLImageElement) {
+  const computedWidthStyle = (img as any).computedStyleMap().get('width');
+  const computedHeightStyle = (img as any).computedStyleMap().get('height');
+  return {
+    natural: {
+      width: img.naturalWidth,
+      height: img.naturalHeight,
+      aspectRatio: img.naturalWidth / img.naturalHeight,
+    },
+    attrs: {
+      width: img.getAttribute('width'),
+      height: img.getAttribute('height'),
+      aspectRatio: getAspectRatioFromAttrs(img),
+    },
+    props: {
+      width: img.style.width,
+      height: img.style.height,
+      aspectRatio: getAspectRatioFromProps(img),
+    },
+    computedStyles: {
+      width: `${computedWidthStyle.value}${computedWidthStyle.unit || ''}`,
+      height: `${computedHeightStyle.value}${computedHeightStyle.unit || ''}`,
+      aspectRatio: getAspectRatioFromComputedStyles(img),
+    },
+    actual: {
+      width: img.width,
+      height: img.height,
+      aspectRatio: img.width / img.height,
+    },
+  };
 }

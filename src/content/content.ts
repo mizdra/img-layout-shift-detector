@@ -3,6 +3,7 @@ import {
   isMissingSizeProp as isMissingAutoSizeProp,
   isMissingExplicitAutoAttrOrProp as isMissingExplicitAutoSizeAttrOrProp,
   isMissingAspectRatioHint,
+  getSizeInfo,
 } from './lib';
 
 const imgs = Array.from(document.querySelectorAll<HTMLImageElement>('img'));
@@ -29,22 +30,18 @@ console.groupEnd();
 //   <img src="200x100.png" width="100" height="50" style="width: 100%;" /> => width="100" height="50" style="width: 100%; height: auto;"
 //   <img src="200x100.png" width="100" height="50" style="height: auto;" />
 
-const missingAspectRatioHintImgs = imgs.filter(isMissingAspectRatioHint);
-console.groupCollapsed(`missing aspect ratio hint (${missingAspectRatioHintImgs.length})`);
-missingAspectRatioHintImgs.forEach((img) => console.log(img));
-console.groupEnd();
+function reportImgs(reportTitle: string, imgs: HTMLImageElement[]): void {
+  console.groupCollapsed(`${reportTitle} (${imgs.length})`);
+  imgs.forEach((img) => {
+    console.groupCollapsed(img);
+    // console.log(img);
+    console.table(getSizeInfo(img));
+    console.groupEnd();
+  });
+  console.groupEnd();
+}
 
-const missingExplicitAutoSizeAttrOrPropImgs = imgs.filter(isMissingExplicitAutoSizeAttrOrProp);
-console.groupCollapsed(`missing explicit auto-size attr or prop (${missingExplicitAutoSizeAttrOrPropImgs.length})`);
-missingExplicitAutoSizeAttrOrPropImgs.forEach((img) => console.log(img));
-console.groupEnd();
-
-const incorrectAspectRatioImgs = imgs.filter(isIncorrectAspectRatio);
-console.groupCollapsed(`incorrect aspect ratio (${incorrectAspectRatioImgs.length})`);
-incorrectAspectRatioImgs.forEach((img) => console.log(img));
-console.groupEnd();
-
-const missingAutoSizePropImgs = imgs.filter(isMissingAutoSizeProp);
-console.groupCollapsed(`missing auto-size prop (${missingAutoSizePropImgs.length})`);
-missingAutoSizePropImgs.forEach((img) => console.log(img));
-console.groupEnd();
+reportImgs('missing aspect ratio hint', imgs.filter(isMissingAspectRatioHint));
+reportImgs('missing explicit auto-size attr or prop', imgs.filter(isMissingExplicitAutoSizeAttrOrProp));
+reportImgs('incorrect aspect ratio', imgs.filter(isIncorrectAspectRatio));
+reportImgs('missing auto-size prop', imgs.filter(isMissingAutoSizeProp));
