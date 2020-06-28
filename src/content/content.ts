@@ -1,7 +1,7 @@
 import {
   isIncorrectAspectRatio,
-  isMissingSizeProp,
-  isMissingExplicitAutoAttrOrProp,
+  isMissingSizeProp as isMissingAutoSizeProp,
+  isMissingExplicitAutoAttrOrProp as isMissingExplicitAutoSizeAttrOrProp,
   isMissingAspectRatioHint,
 } from './lib';
 
@@ -34,9 +34,9 @@ console.groupCollapsed(`missing aspect ratio hint (${missingAspectRatioHintImgs.
 missingAspectRatioHintImgs.forEach((img) => console.log(img));
 console.groupEnd();
 
-const missingExplicitAutoAttrOrPropImgs = imgs.filter(isMissingExplicitAutoAttrOrProp);
-console.groupCollapsed(`missing explicit auto attr or prop (${missingExplicitAutoAttrOrPropImgs.length})`);
-missingExplicitAutoAttrOrPropImgs.forEach((img) => console.log(img));
+const missingExplicitAutoSizeAttrOrPropImgs = imgs.filter(isMissingExplicitAutoSizeAttrOrProp);
+console.groupCollapsed(`missing explicit auto-size attr or prop (${missingExplicitAutoSizeAttrOrPropImgs.length})`);
+missingExplicitAutoSizeAttrOrPropImgs.forEach((img) => console.log(img));
 console.groupEnd();
 
 const incorrectAspectRatioImgs = imgs.filter(isIncorrectAspectRatio);
@@ -44,7 +44,7 @@ console.groupCollapsed(`incorrect aspect ratio (${incorrectAspectRatioImgs.lengt
 incorrectAspectRatioImgs.forEach((img) => console.log(img));
 console.groupEnd();
 
-const missingSizePropImgs = imgs.filter(isMissingSizeProp);
-console.groupCollapsed(`missing auto size prop (${missingSizePropImgs.length})`);
-missingSizePropImgs.forEach((img) => console.log(img));
+const missingAutoSizePropImgs = imgs.filter(isMissingAutoSizeProp);
+console.groupCollapsed(`missing auto-size prop (${missingAutoSizePropImgs.length})`);
+missingAutoSizePropImgs.forEach((img) => console.log(img));
 console.groupEnd();
