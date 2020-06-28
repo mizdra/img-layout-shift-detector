@@ -1,9 +1,10 @@
 import {
   isIncorrectAspectRatio,
-  isMissingSizeProp as isMissingAutoSizeProp,
-  isMissingExplicitAutoAttrOrProp as isMissingExplicitAutoSizeAttrOrProp,
   isMissingAspectRatioHint,
   getSizeInfo,
+  isMissingOneSideAttr,
+  isMissingOneSideProp,
+  isMissingAllSizeAttrsOrProps,
 } from './lib';
 
 const imgs = Array.from(document.querySelectorAll<HTMLImageElement>('img'));
@@ -16,19 +17,23 @@ console.groupEnd();
 //   <img src="200x100.png" style="width: 100%; height: auto;" /> => width="200" height="100" style="width: 100%; height: auto;"
 //   <img src="200x100.png" width="auto" height="auto" />
 
-// missing explicit auto attr or prop
-//   <img src="200x100.png" width="100" /> => width="200" height="auto"
-//   <img src="200x100.png" style="width: 100px;" /> => style="width: 100px; height: auto;"
-//   <img src="200x100.png" /> => style="width: auto; height: auto;"
-
 // incorrect aspect ratio
 //   <img src="200x100.png" width="100" height="100" />
 //   <img src="200x100.png" style="width: 100px; height: 100px;" />
 //   <img src="200x100.png" width="100" height="100" style="width: 100%; height: auto;" />
 
-// missing size prop
-//   <img src="200x100.png" width="100" height="50" style="width: 100%;" /> => width="100" height="50" style="width: 100%; height: auto;"
-//   <img src="200x100.png" width="100" height="50" style="height: auto;" />
+// missing all size attrs or props
+//   <img src="200x100.png" />
+
+// missing one side attr
+//   <img src="200x100.png" width="100" style="width: 100%; height: auto;" />
+//   <img src="200x100.png" width="100" style="height: 50px;" />
+//   <img src="200x100.png" width="100" />
+
+// missing one side prop
+//   <img src="200x100.png" width="100" height="50" style="width: 100%;" />
+//   <img src="200x100.png" width="100" style="height: 50px;" />
+//   <img src="200x100.png" style="width: 100px;" />
 
 function reportImgs(reportTitle: string, imgs: HTMLImageElement[]): void {
   console.groupCollapsed(`${reportTitle} (${imgs.length})`);
@@ -42,6 +47,7 @@ function reportImgs(reportTitle: string, imgs: HTMLImageElement[]): void {
 }
 
 reportImgs('missing aspect ratio hint', imgs.filter(isMissingAspectRatioHint));
-reportImgs('missing explicit auto-size attr or prop', imgs.filter(isMissingExplicitAutoSizeAttrOrProp));
 reportImgs('incorrect aspect ratio', imgs.filter(isIncorrectAspectRatio));
-reportImgs('missing auto-size prop', imgs.filter(isMissingAutoSizeProp));
+reportImgs('missing all size attrs or props', imgs.filter(isMissingAllSizeAttrsOrProps));
+reportImgs('missing one side attr', imgs.filter(isMissingOneSideAttr));
+reportImgs('missing one side prop', imgs.filter(isMissingOneSideProp));

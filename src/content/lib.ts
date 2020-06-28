@@ -52,24 +52,6 @@ export function isMissingAspectRatioHint(img: HTMLImageElement): boolean {
   return false;
 }
 
-export function isMissingExplicitAutoAttrOrProp(img: HTMLImageElement): boolean {
-  const computedWidthStyle = (img as any).computedStyleMap().get('width');
-  const computedHeightStyle = (img as any).computedStyleMap().get('height');
-
-  // 結果として auto になっているにも関わらず、明示的に属性やプロパティで指定されていなければ真
-  if (computedWidthStyle.value === 'auto') {
-    if (img.getAttribute('width') !== 'auto' && img.style.width !== 'auto') {
-      return true;
-    }
-  }
-  if (computedHeightStyle.value === 'auto') {
-    if (img.getAttribute('height') !== 'auto' && img.style.height !== 'auto') {
-      return true;
-    }
-  }
-  return false;
-}
-
 export function isIncorrectAspectRatio(img: HTMLImageElement): boolean {
   const aspectRatioFromAttrs = getAspectRatioFromAttrs(img);
   const aspectRatioFromProps = getAspectRatioFromProps(img);
@@ -85,11 +67,17 @@ export function isIncorrectAspectRatio(img: HTMLImageElement): boolean {
   return false;
 }
 
-export function isMissingSizeProp(img: HTMLImageElement): boolean {
-  const aspectRatioFromAttrs = getAspectRatioFromAttrs(img);
-  // アスペクト比のヒントのための属性が無ければならない
-  if (aspectRatioFromAttrs === null) return false;
+export function isMissingAllSizeAttrsOrProps(img: HTMLImageElement): boolean {
+  return !hasAttr(img, 'width') && !hasAttr(img, 'height') && !hasProp(img, 'width') && !hasProp(img, 'height');
+}
 
+export function isMissingOneSideAttr(img: HTMLImageElement): boolean {
+  if (hasAttr(img, 'width') && hasAttr(img, 'height')) return false;
+  if (!hasAttr(img, 'width') && !hasAttr(img, 'height')) return false;
+  return true;
+}
+
+export function isMissingOneSideProp(img: HTMLImageElement): boolean {
   if (hasProp(img, 'width') && hasProp(img, 'height')) return false;
   if (!hasProp(img, 'width') && !hasProp(img, 'height')) return false;
   return true;
