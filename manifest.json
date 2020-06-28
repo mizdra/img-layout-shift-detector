@@ -2,15 +2,28 @@
   "manifest_version": 2,
   "name": "img-layout-shift-detector",
   "description": "The browser extension that detects `<img>` tags that cause Layout Shift",
+  "author": "mizdra",
   "version": "0.0.1",
   "browser_specific_settings": {
     "gecko": {
       "strict_min_version": "58.0"
     }
   },
+  "homepage_url": "https://github.com/mizdra/img-layout-shift-detector",
+  "icons": {
+    "16": "static/icon-16x16.png",
+    "32": "static/icon-32x32.png",
+    "48": "static/icon-48x48.png",
+    "96": "static/icon-96x96.png",
+    "128": "static/icon.svg"
+  },
 
   "browser_action": {
-    "default_icon": "static/icon.svg",
+    "default_icon": {
+      "16": "static/icon-16x16.png",
+      "32": "static/icon-32x32.png",
+      "48": "static/icon.svg"
+    },
     "default_title": "Detect <img> that cause Layout Shift"
   },
   "background": {
