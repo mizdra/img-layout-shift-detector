@@ -11,8 +11,10 @@
 
   "browser_action": {
     "default_icon": "static/icon.svg",
-    "default_popup": "popup.html",
     "default_title": "Detect <img> that cause Layout Shift"
+  },
+  "background": {
+    "scripts": ["dist/js/background.js"]
   },
 
   "permissions": ["activeTab"]
