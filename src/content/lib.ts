@@ -87,30 +87,40 @@ export function getSizeInfo(img: HTMLImageElement) {
   const computedWidthStyle = (img as any).computedStyleMap().get('width');
   const computedHeightStyle = (img as any).computedStyleMap().get('height');
   return {
-    natural: {
+    'HTMLImageElement.naturalXXX': {
       width: img.naturalWidth,
       height: img.naturalHeight,
       aspectRatio: img.naturalWidth / img.naturalHeight,
     },
-    attrs: {
+    "Element.getAttribute('XXX')": {
       width: img.getAttribute('width'),
       height: img.getAttribute('height'),
       aspectRatio: getAspectRatioFromAttrs(img),
     },
-    props: {
+    'HTMLElement.style.XXX': {
       width: img.style.width,
       height: img.style.height,
       aspectRatio: getAspectRatioFromProps(img),
     },
-    computedStyles: {
+    "Element.computedStyleMap().get('XXX')": {
       width: `${computedWidthStyle.value}${computedWidthStyle.unit || ''}`,
       height: `${computedHeightStyle.value}${computedHeightStyle.unit || ''}`,
       aspectRatio: getAspectRatioFromComputedStyles(img),
     },
-    actual: {
+    'HTMLElement.XXX': {
       width: img.width,
       height: img.height,
       aspectRatio: img.width / img.height,
+    },
+    'HTMLElement.clientXXX': {
+      width: img.clientWidth,
+      height: img.clientHeight,
+      aspectRatio: img.clientWidth / img.clientHeight,
+    },
+    'HTMLElement.offsetXXX': {
+      width: img.offsetWidth,
+      height: img.offsetHeight,
+      aspectRatio: img.offsetWidth / img.offsetHeight,
     },
   };
 }
