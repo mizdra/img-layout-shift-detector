@@ -1,4 +1,5 @@
 const { resolve } = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const rootPath = resolve(__dirname, '.');
 const srcPath = resolve(__dirname, './src');
@@ -31,4 +32,13 @@ module.exports = (env, argv) => ({
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
   },
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: resolve(distPath, './index.html'),
+      template: resolve(rootPath, 'index.html'),
+      chunks: ['content'],
+      scriptLoading: 'defer',
+    }),
+  ],
 });
