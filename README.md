@@ -15,11 +15,11 @@ The browser extension that detects `<img>` tags that cause Layout Shift
 
 ## Supported Rules
 
-- [missing-aspect-ratio-hint](https://github.com/mizdra/img-layout-shift-detector/blob/master/rule-docs/missing-aspect-ratio-hint.md)
-- [incorrect-aspect-ratio](https://github.com/mizdra/img-layout-shift-detector/blob/master/rule-docs/incorrect-aspect-ratio.md)
-- [missing-all-size-attrs-or-props](https://github.com/mizdra/img-layout-shift-detector/blob/master/rule-docs/missing-all-size-attrs-or-props.md)
-- [missing-one-side-attr](https://github.com/mizdra/img-layout-shift-detector/blob/master/rule-docs/missing-one-side-attr.md)
-- [missing-one-side-prop](https://github.com/mizdra/img-layout-shift-detector/blob/master/rule-docs/missing-one-side-prop.md)
+- [missing-aspect-ratio-hint](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/missing-aspect-ratio-hint.md)
+- [incorrect-aspect-ratio](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/incorrect-aspect-ratio.md)
+- [missing-all-size-attrs-or-props](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/missing-all-size-attrs-or-props.md)
+- [missing-one-side-attr](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/missing-one-side-attr.md)
+- [missing-one-side-prop](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/missing-one-side-prop.md)
 
 ## Playground
 
