@@ -23,9 +23,9 @@ The browser extension that detects `<img>` tags that cause Layout Shift
 
 ## Playground
 
-1. Open console tab of devtools
 1. Open https://img-layout-shift-detector.netlify.app
-1. The report is outputed to console tab
+1. Open console tab of devtools
+1. The report is outputed to console tab (**If you don't see the table, please reload page**)
 
 ## How to develop
 
