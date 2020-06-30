@@ -8,13 +8,13 @@ function getAspectRatioFromAttrs(img: HTMLImageElement): number | null {
   return +width / +height;
 }
 
-const SIZE_PROP_VALUE_BY_PIXEL = /\d+px/;
 function getAspectRatioFromProps(img: HTMLImageElement): number | null {
-  const width = img.style.width; // プロパティが指定されていない場合は空文字が格納される
-  const height = img.style.height; // プロパティが指定されていない場合は空文字が格納される
+  const width = getAuthorStyleSheetProp(img, 'width');
+  const height = getAuthorStyleSheetProp(img, 'height');
+  if (width === null || height === null) return null;
   // width: auto; や width: 100%; を弾く
-  if (!SIZE_PROP_VALUE_BY_PIXEL.test(width) || !SIZE_PROP_VALUE_BY_PIXEL.test(height)) return null;
-  return +width.slice(0, -2) / +height.slice(0, -2);
+  if (width.unit !== 'px' || height.unit !== 'px') return null;
+  return width.value / height.value;
 }
 
 function getAspectRatioFromComputedStyles(img: HTMLImageElement): number | null {
@@ -26,11 +26,92 @@ function getAspectRatioFromComputedStyles(img: HTMLImageElement): number | null 
 }
 
 function hasProp(img: HTMLImageElement, propName: keyof CSSStyleDeclaration): boolean {
-  return img.style[propName] !== '';
+  return !!getAuthorStyleSheetProp(img, propName);
 }
 
 function hasAttr(img: HTMLImageElement, attrName: string): boolean {
   return img.getAttribute(attrName) !== null;
+}
+
+function getMatchedStyleRules(img: HTMLImageElement): CSSStyleRule[] {
+  function getStyleRules(rule: CSSRule): CSSStyleRule[] {
+    if (rule instanceof CSSFontFaceRule) {
+      // `@font-face`
+      // noop
+    } else if (rule instanceof CSSGroupingRule) {
+      if (rule instanceof CSSConditionRule) {
+        if (rule instanceof CSSMediaRule) {
+          // `@media`
+          if (window.matchMedia(rule.conditionText)) {
+            return Array.from(rule.cssRules).map(getStyleRules).flat();
+          }
+        }
+      } else if (rule instanceof CSSPageRule) {
+        // `@page`
+        // noop
+      } else {
+        // unknown
+        // noop
+      }
+    } else if (rule instanceof CSSImportRule) {
+      // `@import`
+      return Array.from(rule.styleSheet.cssRules).map(getStyleRules).flat();
+    } else if (rule instanceof CSSKeyframeRule) {
+      // `@keyframes <name> { <keyframe>* }`
+      // noop
+    } else if (rule instanceof CSSKeyframesRule) {
+      // `@keyframes`
+      // noop
+    } else if (rule instanceof CSSNamespaceRule) {
+      // `@namespace`
+      // noop
+    } else if (rule instanceof CSSStyleRule) {
+      // <selector> { <style-rule> }
+      return [rule];
+    } else {
+      // unknown
+      // noop
+    }
+    return [];
+  }
+  const sheets = Array.from(img.ownerDocument.styleSheets);
+  const rules = sheets.map((sheet) => Array.from(sheet.cssRules)).flat();
+  const styleRules = rules.map(getStyleRules).flat();
+  const matchedRules = styleRules.filter((rule) => img.matches(rule.selectorText));
+  return matchedRules;
+}
+
+type CSSUnitValue = any;
+
+// author's style sheet (`<link rel="stylesheet">` で読み込まれるスタイルシートや、 `<style>` や style 属性に直書きされたスタイルのこと) で
+// 指定されたプロパティを取得する
+function getAuthorStyleSheetProp(img: HTMLImageElement, propName: keyof CSSStyleDeclaration): CSSUnitValue | null {
+  // `computedStyleMap().get(propName)` だとブラウザ標準のスタイルシート (user agent declarations) や
+  // Presentational Hints で設定したプロパティが取得されてしまうので、上手いこと条件分岐して
+  // author's style sheet で指定されたプロパティのみを取得するようにする。
+  // ref: https://developer.mozilla.org/ja/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance#To_summarize
+  // ref: https://www.w3.org/TR/css-cascade-4/#cascade-origin
+  // ref: https://www.w3.org/TR/css-cascade-4/#preshint
+
+  // NOTE: `user declarations` はかつて UserCSS と呼ばれていたものであり、現代ではFirefoxくらいしかサポートしていないので、無視する
+  // ref: https://stackoverflow.com/a/59209554
+
+  // NOTE: 厳密には `Important user agent declarations` も考慮しないといけないけど、現実にそんなものは存在しないはずなので無視する
+
+  // style 属性があれば `computedStyleMap().get(propName)` で author's style sheet にて設定されたプロパティが取れる
+  if (img.style[propName] !== '') {
+    return (img as any).computedStyleMap().get(propName);
+  }
+
+  // `<link rel="stylesheet">` や `<style>` で設定されたプロパティを取得
+  const matchedStyleRules = getMatchedStyleRules(img);
+  const styleSheetProps: CSSUnitValue = matchedStyleRules.map((rule) => (rule as any).styleMap.get(propName));
+  // `<link rel="stylesheet">` や `<style>` でプロパティが設定されていれば、`computedStyleMap().get(propName)` で取得できる
+  if (styleSheetProps.length > 0) {
+    return (img as any).computedStyleMap().get(propName);
+  }
+
+  return null;
 }
 
 export function isMissingAspectRatioHint(img: HTMLImageElement): boolean {
@@ -92,14 +173,14 @@ export function getSizeInfo(img: HTMLImageElement) {
       height: img.naturalHeight,
       aspectRatio: img.naturalWidth / img.naturalHeight,
     },
-    "Element.getAttribute('XXX')": {
+    attrs: {
       width: img.getAttribute('width'),
       height: img.getAttribute('height'),
       aspectRatio: getAspectRatioFromAttrs(img),
     },
-    'HTMLElement.style.XXX': {
-      width: img.style.width,
-      height: img.style.height,
+    props: {
+      width: getAuthorStyleSheetProp(img, 'width'),
+      height: getAuthorStyleSheetProp(img, 'height'),
       aspectRatio: getAspectRatioFromProps(img),
     },
     "Element.computedStyleMap().get('XXX')": {
