@@ -1,3 +1,13 @@
+const SIZE_ATTR_VALUE_BY_PIXEL = /\d+/;
+const DUMMY_SIZE_ATTRIBUTE_VALUE = 10000;
+type SizeInfo = {
+  [key: string]: {
+    width: number | string | null;
+    height: number | string | null;
+    aspectRatio: number | null;
+  };
+};
+
 export function hasProp(img: HTMLImageElement, propName: 'width' | 'height'): boolean {
   return !!getProp(img, propName);
 }
@@ -6,7 +16,10 @@ export function hasAttr(img: HTMLImageElement, attrName: 'width' | 'height'): bo
   return img.getAttribute(attrName) !== null;
 }
 
-const SIZE_ATTR_VALUE_BY_PIXEL = /\d+/;
+/**
+ * width/height 属性からアスペクト比を計算して返す。
+ * `width="auto"` のような値が設定されていてアスペクト比が計算不能な場合は null を返す。
+ * */
 export function getAspectRatioFromAttrs(img: HTMLImageElement): number | null {
   const width = img.getAttribute('width');
   const height = img.getAttribute('height');
@@ -16,6 +29,10 @@ export function getAspectRatioFromAttrs(img: HTMLImageElement): number | null {
   return +width / +height;
 }
 
+/**
+ * width/height プロパティからアスペクト比を計算して返す。
+ * `width: auto;` のような値が設定されていてアスペクト比が計算不能な場合は null を返す。
+ * */
 export function getAspectRatioFromProps(img: HTMLImageElement): number | null {
   const width = getProp(img, 'width');
   const height = getProp(img, 'height');
@@ -27,17 +44,21 @@ export function getAspectRatioFromProps(img: HTMLImageElement): number | null {
   return width.value / height.value;
 }
 
+/**
+ * `computedStyleMap()` からアスペクト比を計算して返す。
+ * `width="auto"` や `width: auto;` のような値が設定されていてアスペクト比が計算不能な場合は null を返す。
+ * */
 function getAspectRatioFromComputedStyles(img: HTMLImageElement): number | null {
-  const width = (img as any).computedStyleMap().get('width');
-  const height = (img as any).computedStyleMap().get('height');
+  const width = img.computedStyleMap().get('width');
+  const height = img.computedStyleMap().get('height');
 
+  if (width === undefined || height === undefined) return null;
+  if (!(width instanceof CSSUnitValue && height instanceof CSSUnitValue)) return null;
   if (width.unit !== 'px' || height.unit !== 'px') return null;
   return width.value / height.value;
 }
 
-const DUMMY_SIZE_ATTRIBUTE_VALUE = 10000;
-
-// style 属性やスタイルシートで設定されたプロパティの値を取得する
+/** style 属性やスタイルシートで設定されたプロパティの値を取得する。 */
 export function getProp(img: HTMLImageElement, propName: 'width' | 'height'): CSSStyleValue | null {
   // `computedStyleMap()` では画像オリジナルのサイズや width/height 属性の値も取れてしまうので、
   // width/height 属性にダミーの値を入れて、本来 `computedStyleMap()` で得られるものが style 属性や
@@ -67,7 +88,8 @@ export function getProp(img: HTMLImageElement, propName: 'width' | 'height'): CS
   return styleValue;
 }
 
-export function getSizeInfo(img: HTMLImageElement) {
+/** 寸法に関する情報を返す */
+export function getSizeInfo(img: HTMLImageElement): SizeInfo {
   const widthProp = getProp(img, 'width');
   const heightProp = getProp(img, 'height');
   const computedWidthStyle = img.computedStyleMap().get('width');
