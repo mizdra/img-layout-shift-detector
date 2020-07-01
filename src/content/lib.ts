@@ -95,11 +95,6 @@ function getSizeInfo(img: HTMLImageElement): SizeInfo {
   const computedWidthStyle = img.computedStyleMap().get('width');
   const computedHeightStyle = img.computedStyleMap().get('height');
   return {
-    'HTMLImageElement.naturalXXX': {
-      width: img.naturalWidth,
-      height: img.naturalHeight,
-      aspectRatio: img.naturalWidth / img.naturalHeight,
-    },
     attrs: {
       width: img.getAttribute('width'),
       height: img.getAttribute('height'),
@@ -119,6 +114,11 @@ function getSizeInfo(img: HTMLImageElement): SizeInfo {
       width: img.width,
       height: img.height,
       aspectRatio: img.width / img.height,
+    },
+    'HTMLImageElement.naturalXXX': {
+      width: img.naturalWidth,
+      height: img.naturalHeight,
+      aspectRatio: img.naturalWidth / img.naturalHeight,
     },
     'HTMLElement.clientXXX': {
       width: img.clientWidth,
