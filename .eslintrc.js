@@ -5,5 +5,8 @@ module.exports = {
     es6: true,
     browser: true,
   },
+  globals: {
+    CSSUnitValue: 'readonly',
+  },
   rules: {},
 };
