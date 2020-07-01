@@ -1,8 +1,8 @@
 import { getAspectRatioFromAttrs, hasProp, hasAttr, getAspectRatioFromProps } from './lib';
 
 export function isMissingAspectRatioHint(img: HTMLImageElement): boolean {
-  const computedWidthStyle = (img as any).computedStyleMap().get('width');
-  const computedHeightStyle = (img as any).computedStyleMap().get('height');
+  const computedWidthStyle = img.computedStyleMap().get('width');
+  const computedHeightStyle = img.computedStyleMap().get('height');
   const aspectRatioFromAttrs = getAspectRatioFromAttrs(img);
 
   const hasProps = hasProp(img, 'width') && hasProp(img, 'height');
@@ -11,7 +11,10 @@ export function isMissingAspectRatioHint(img: HTMLImageElement): boolean {
   if (!hasProps && !hasAttrs) return false;
 
   // アスペクト比に応じて要素の寸法が変わるにも関わらず、属性でアスペクト比のヒントが明示されていなければ真
-  if (computedWidthStyle.value === 'auto' || computedHeightStyle.value === 'auto') {
+  if (
+    (computedWidthStyle instanceof CSSKeywordValue && computedWidthStyle.value === 'auto') ||
+    (computedHeightStyle instanceof CSSKeywordValue && computedHeightStyle.value) === 'auto'
+  ) {
     if (aspectRatioFromAttrs === null) {
       return true;
     }

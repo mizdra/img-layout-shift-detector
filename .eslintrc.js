@@ -7,6 +7,7 @@ module.exports = {
   },
   globals: {
     CSSUnitValue: 'readonly',
+    CSSKeywordValue: 'readonly',
   },
   rules: {},
 };
