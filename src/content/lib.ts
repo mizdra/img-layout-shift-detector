@@ -1,4 +1,4 @@
-const SIZE_ATTR_VALUE_BY_PIXEL = /\d+/;
+const SIZE_ATTR_VALUE_BY_PIXEL = /^\d+$/;
 const DUMMY_SIZE_ATTRIBUTE_VALUE = 10000;
 type SizeInfo = {
   [key: string]: {
