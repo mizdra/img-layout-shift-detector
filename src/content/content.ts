@@ -1,11 +1,11 @@
+import { getSizeInfo } from './lib';
 import {
-  isIncorrectAspectRatio,
   isMissingAspectRatioHint,
-  getSizeInfo,
+  isIncorrectAspectRatio,
+  isMissingAllSizeAttrsOrProps,
   isMissingOneSideAttr,
   isMissingOneSideProp,
-  isMissingAllSizeAttrsOrProps,
-} from './lib';
+} from './rule';
 
 const imgs = Array.from(document.querySelectorAll<HTMLImageElement>('img'));
 console.groupCollapsed(`all imgs (${imgs.length})`);
