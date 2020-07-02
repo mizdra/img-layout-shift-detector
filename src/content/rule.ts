@@ -5,16 +5,10 @@ export function isMissingAspectRatioHint(img: HTMLImageElement): boolean {
   const computedHeightStyle = img.computedStyleMap().get('height');
   const aspectRatioFromAttrs = getAspectRatioFromAttrs(img);
 
-  const hasProps = hasProp(img, 'width') && hasProp(img, 'height');
-  const hasAttrs = hasAttr(img, 'width') && hasAttr(img, 'height');
-  // プロパティ、属性どちらかが設定されていなければならない
-  if (!hasProps && !hasAttrs) return false;
-
   // アスペクト比に応じて要素の寸法が変わるにも関わらず、属性でアスペクト比のヒントが明示されていなければ真
-  if (
-    (computedWidthStyle instanceof CSSKeywordValue && computedWidthStyle.value === 'auto') ||
-    (computedHeightStyle instanceof CSSKeywordValue && computedHeightStyle.value) === 'auto'
-  ) {
+  const isAutoWidth = computedWidthStyle instanceof CSSKeywordValue && computedWidthStyle.value === 'auto';
+  const isAutoHeight = computedHeightStyle instanceof CSSKeywordValue && computedHeightStyle.value === 'auto';
+  if ((isAutoWidth && !isAutoHeight) || (!isAutoWidth && isAutoHeight)) {
     if (aspectRatioFromAttrs === null) {
       return true;
     }
