@@ -26,7 +26,9 @@ declare const CSSNumericValue: {
   new (): CSSNumericValue;
 };
 
-interface CSSNumericValue extends CSSStyleValue {}
+interface CSSNumericValue extends CSSStyleValue {
+  to(unit: 'px'): CSSUnitValue;
+}
 
 declare const CSSUnitValue: {
   prototype: CSSUnitValue;

@@ -39,6 +39,17 @@ export function getAspectRatioFromAttrs(img: HTMLImageElement): number | null {
   return +width / +height;
 }
 
+/** width: 100%; など厳密に px に変換できないものかどうか */
+function canConvertToPixel(unitValue: CSSUnitValue): boolean {
+  try {
+    unitValue.to('px');
+    return true;
+  } catch (e) {
+    if (e instanceof TypeError) return false;
+    throw new Error(e);
+  }
+}
+
 /**
  * width/height プロパティからアスペクト比を計算して返す。
  * `width: auto;` のような値が設定されていてアスペクト比が計算不能な場合は null を返す。
@@ -49,12 +60,13 @@ export function getAspectRatioFromProps(img: HTMLImageElement): number | null {
   if (width === null || height === null) return null;
   // width: auto; などを弾く
   if (!(width instanceof CSSUnitValue && height instanceof CSSUnitValue)) return null;
-  // width: 100%; などを弾く
-  if (width.unit !== 'px' || height.unit !== 'px') return null;
-  // NOTE: 本来 `width: 50vw;` が設定されるとアスペクト比が厳密には計算できないはずだが、
-  // `width: 50vw;` は CSSUnitValue#unit === 'px' になってしまう関係で、アスペクト比が取れてしまう。
+  // width: 100%; など厳密に px に変換できないものが設定されている場合は null が返される。
+  // NOTE: 本来 `width: 50vw;` は厳密に px に変換できないはずだが、現在のブラウザ実装では
+  // `width: 50vw;` を `computedStyleMap` で取得すると CSSUnitValue#unit === 'px' になってしまう関係で、
+  // `canConvertToPixel` で真が返ってきてしまう。そのため、アスペクト比の計算にも成功してしまう。
   // TODO: `width: 50vw;` の単位が 'vw' であるとJSから判別できるようになったら、null を返すよう修正する。
-  return width.value / height.value;
+  if (!canConvertToPixel(width) || !canConvertToPixel(height)) return null;
+  return width.to('px').value / height.to('px').value;
 }
 
 /**
@@ -67,11 +79,13 @@ export function getAspectRatioFromComputedStyles(img: HTMLImageElement): number 
 
   if (width === undefined || height === undefined) return null;
   if (!(width instanceof CSSUnitValue && height instanceof CSSUnitValue)) return null;
-  if (width.unit !== 'px' || height.unit !== 'px') return null;
-  // NOTE: 本来 `width: 50vw;` が設定されるとアスペクト比が厳密には計算できないはずだが、
-  // `width: 50vw;` は CSSUnitValue#unit === 'px' になってしまう関係で、アスペクト比が取れてしまう。
+  // width: 100%; など厳密に px に変換できないものが設定されている場合は null が返される。
+  // NOTE: 本来 `width: 50vw;` は厳密に px に変換できないはずだが、現在のブラウザ実装では
+  // `width: 50vw;` を `computedStyleMap` で取得すると CSSUnitValue#unit === 'px' になってしまう関係で、
+  // `canConvertToPixel` で真が返ってきてしまう。そのため、アスペクト比の計算にも成功してしまう。
   // TODO: `width: 50vw;` の単位が 'vw' であるとJSから判別できるようになったら、null を返すよう修正する。
-  return width.value / height.value;
+  if (!canConvertToPixel(width) || !canConvertToPixel(height)) return null;
+  return width.to('px').value / height.to('px').value;
 }
 
 /** style 属性やスタイルシートで設定されたプロパティの値を取得する。 */
@@ -90,16 +104,8 @@ export function getProp(img: HTMLImageElement, propName: 'width' | 'height'): CS
   }
 
   if (styleValue === undefined) return null;
-
   // computed style value が width/height 属性の値なら、プロパティは何も指定されていない
-  if (
-    styleValue instanceof CSSUnitValue &&
-    styleValue.unit === 'px' &&
-    styleValue.value === DUMMY_SIZE_ATTRIBUTE_VALUE
-  ) {
-    return null;
-  }
-
+  if (styleValue.toString() === `${DUMMY_SIZE_ATTRIBUTE_VALUE}px`) return null;
   // computed style value が width/height 属性の値でなければ、それがプロパティにより設定された値である
   return styleValue;
 }
