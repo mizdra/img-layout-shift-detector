@@ -1,17 +1,19 @@
 import { reportImgs } from './lib';
 import {
-  isMissingAspectRatioHint,
-  isIncorrectAspectRatio,
-  isMissingAllSizeAttrsOrProps,
-  isMissingOneSideAttr,
-  isMissingOneSideProp,
+  verifyRequireAspectRatioHint,
+  verifyNoMismatchOfApparentSize,
+  verifyRequireIntrinsicSize,
+  verifyNoDefectiveAttribute,
+  verifyNoDefectiveProperty,
+  verifyNoMismatchOfAspectRatioHint,
 } from './rule';
 
 const imgs = Array.from(document.querySelectorAll<HTMLImageElement>('img'));
 
 reportImgs('all imgs', imgs);
-reportImgs('missing aspect ratio hint', imgs.filter(isMissingAspectRatioHint));
-reportImgs('incorrect aspect ratio', imgs.filter(isIncorrectAspectRatio));
-reportImgs('missing all size attrs or props', imgs.filter(isMissingAllSizeAttrsOrProps));
-reportImgs('missing one side attr', imgs.filter(isMissingOneSideAttr));
-reportImgs('missing one side prop', imgs.filter(isMissingOneSideProp));
+reportImgs('require-intrinsic-size', imgs.filter(verifyRequireIntrinsicSize));
+reportImgs('require-aspect-ratio-hint', imgs.filter(verifyRequireAspectRatioHint));
+reportImgs('no-mismatch-of-aspect-ratio-hint', imgs.filter(verifyNoMismatchOfAspectRatioHint));
+reportImgs('no-mismatch-of-apparent-size', imgs.filter(verifyNoMismatchOfApparentSize));
+reportImgs('no-defective-attribute', imgs.filter(verifyNoDefectiveAttribute));
+reportImgs('no-defective-property', imgs.filter(verifyNoDefectiveProperty));

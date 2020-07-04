@@ -16,6 +16,16 @@ export function hasAttr(img: HTMLImageElement, attrName: 'width' | 'height'): bo
   return img.getAttribute(attrName) !== null;
 }
 
+/** アスペクト比に応じて寸法が変わる img かどうか */
+export function isScalableByAspectRatio(img: HTMLImageElement): boolean {
+  const computedWidthStyle = img.computedStyleMap().get('width');
+  const computedHeightStyle = img.computedStyleMap().get('height');
+
+  const isAutoWidth = computedWidthStyle?.toString() === 'auto';
+  const isAutoHeight = computedHeightStyle?.toString() === 'auto';
+  return (isAutoWidth && !isAutoHeight) || (!isAutoWidth && isAutoHeight);
+}
+
 /**
  * width/height 属性からアスペクト比を計算して返す。
  * `width="auto"` のような値が設定されていてアスペクト比が計算不能な場合は null を返す。
@@ -41,6 +51,9 @@ export function getAspectRatioFromProps(img: HTMLImageElement): number | null {
   if (!(width instanceof CSSUnitValue && height instanceof CSSUnitValue)) return null;
   // width: 100%; などを弾く
   if (width.unit !== 'px' || height.unit !== 'px') return null;
+  // NOTE: 本来 `width: 50vw;` が設定されるとアスペクト比が厳密には計算できないはずだが、
+  // `width: 50vw;` は CSSUnitValue#unit === 'px' になってしまう関係で、アスペクト比が取れてしまう。
+  // TODO: `width: 50vw;` の単位が 'vw' であるとJSから判別できるようになったら、null を返すよう修正する。
   return width.value / height.value;
 }
 
@@ -48,13 +61,16 @@ export function getAspectRatioFromProps(img: HTMLImageElement): number | null {
  * `computedStyleMap()` からアスペクト比を計算して返す。
  * `width="auto"` や `width: auto;` のような値が設定されていてアスペクト比が計算不能な場合は null を返す。
  * */
-function getAspectRatioFromComputedStyles(img: HTMLImageElement): number | null {
+export function getAspectRatioFromComputedStyles(img: HTMLImageElement): number | null {
   const width = img.computedStyleMap().get('width');
   const height = img.computedStyleMap().get('height');
 
   if (width === undefined || height === undefined) return null;
   if (!(width instanceof CSSUnitValue && height instanceof CSSUnitValue)) return null;
   if (width.unit !== 'px' || height.unit !== 'px') return null;
+  // NOTE: 本来 `width: 50vw;` が設定されるとアスペクト比が厳密には計算できないはずだが、
+  // `width: 50vw;` は CSSUnitValue#unit === 'px' になってしまう関係で、アスペクト比が取れてしまう。
+  // TODO: `width: 50vw;` の単位が 'vw' であるとJSから判別できるようになったら、null を返すよう修正する。
   return width.value / height.value;
 }
 
