@@ -12,7 +12,7 @@ import { waitImgsLoad } from './wait';
 (async () => {
   const imgs = Array.from(document.querySelectorAll<HTMLImageElement>('img'));
 
-  console.log('Analyzing image...');
+  console.log('[img-layout-shift-detector] Analyzing image...');
   await waitImgsLoad(imgs);
 
   const DEFAULT_LOG_LEVEL = {
