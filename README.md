@@ -2,7 +2,7 @@
 
 The browser extension that detects `<img>` tags that cause Layout Shift
 
-<div style="text-align: center;">
+<div align="center">
 
 ![Logo](./static/icon.svg?raw=true)
 
@@ -17,7 +17,7 @@ The browser extension that detects `<img>` tags that cause Layout Shift
 
 ## Screenshots
 
-<div style="text-align: center;">
+<div align="center">
 
 ![Screenshot](./static/screenshot.png?raw=true)
 
