@@ -2,6 +2,12 @@
 
 The browser extension that detects `<img>` tags that cause Layout Shift
 
+<div style="text-align: center;">
+
+![Logo](./static/icon.svg?raw=true)
+
+</div>
+
 ## Usage
 
 1. Access page you want to measure layout shift by `<img>`
@@ -11,7 +17,11 @@ The browser extension that detects `<img>` tags that cause Layout Shift
 
 ## Screenshots
 
+<div style="text-align: center;">
+
 ![Screenshot](./static/screenshot.png?raw=true)
+
+</div>
 
 ## Supported Rules
 
