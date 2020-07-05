@@ -111,7 +111,7 @@ export function getProp(img: HTMLImageElement, propName: 'width' | 'height'): CS
 }
 
 /** 寸法に関する情報を返す */
-function getSizeInfo(img: HTMLImageElement): SizeInfo {
+export function getSizeInfo(img: HTMLImageElement): SizeInfo {
   const widthProp = getProp(img, 'width');
   const heightProp = getProp(img, 'height');
   const computedWidthStyle = img.computedStyleMap().get('width');
@@ -153,16 +153,4 @@ function getSizeInfo(img: HTMLImageElement): SizeInfo {
       aspectRatio: img.offsetWidth / img.offsetHeight,
     },
   };
-}
-
-/** 渡された img 要素の寸法に関する情報をコンソールに出力する */
-export function reportImgs(reportTitle: string, imgs: HTMLImageElement[]): void {
-  console.groupCollapsed(`${reportTitle} (${imgs.length})`);
-  imgs.forEach((img) => {
-    console.groupCollapsed(img);
-    // console.log(img);
-    console.table(getSizeInfo(img));
-    console.groupEnd();
-  });
-  console.groupEnd();
 }
