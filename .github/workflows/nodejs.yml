@@ -31,5 +31,8 @@ jobs:
       - name: yarn run build
         run: yarn run build
 
+      - name: yarn run check:karma
+        run: yarn run check:karma
+
       - name: yarn run check:web-ext
         run: yarn run check:web-ext

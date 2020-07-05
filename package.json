@@ -13,6 +13,8 @@
     "check": "run-p -l -c 'check:tsc --pretty' 'check:eslint --color' check:prettier",
     "check:tsc": "tsc --noEmit",
     "check:eslint": "eslint 'src/**/*.{ts,tsx}'",
+    "check:karma": "karma start --single-run",
+    "check:karma:watch": "karma start",
     "check:web-ext": "web-ext lint"
   },
   "repository": {
