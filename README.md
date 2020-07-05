@@ -27,8 +27,8 @@ The browser extension that detects `<img>` tags that cause Layout Shift
 <img
   alt="Logo"
   src="./static/screenshot.png?raw=true"
-  width="2414"
-  height="1730"
+  width="1207"
+  height="865"
 />
 
 </div>
