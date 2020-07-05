@@ -81,25 +81,25 @@ describe('isScalableByAspectRatio', () => {
 describe('getAspectRatioFromAttrs', () => {
   it('width/height 属性からアスペクト比が計算できれば、そのアスペクト比が返る', async () => {
     const img1 = await createImg([2, 3], { width: '5', height: '7' });
-    expect(getAspectRatioFromAttrs(img1)).toEqual(5 / 7);
+    expect(getAspectRatioFromAttrs(img1)).toBeCloseTo(5 / 7);
 
     const img3 = await createImg([2, 3], { width: '5', height: '7', style: 'width: 11px; height: 13px;' });
-    expect(getAspectRatioFromAttrs(img3)).toEqual(5 / 7);
+    expect(getAspectRatioFromAttrs(img3)).toBeCloseTo(5 / 7);
 
     // TODO: スタイルシートを使ったテストケースも追加する
   });
   it('width/height 属性からアスペクト比が計算できなければ null が返る', async () => {
     const img1 = await createImg([2, 3], { width: '5', height: 'auto' });
-    expect(getAspectRatioFromAttrs(img1)).toEqual(null);
+    expect(getAspectRatioFromAttrs(img1)).toBeNull();
 
     const img2 = await createImg([2, 3], { width: '5', height: '7%' });
-    expect(getAspectRatioFromAttrs(img2)).toEqual(null);
+    expect(getAspectRatioFromAttrs(img2)).toBeNull();
 
     const img3 = await createImg([2, 3], { width: '5' });
-    expect(getAspectRatioFromAttrs(img3)).toEqual(null);
+    expect(getAspectRatioFromAttrs(img3)).toBeNull();
 
     const img4 = await createImg([2, 3], { style: 'width: 11px; height: 13px;' });
-    expect(getAspectRatioFromAttrs(img4)).toEqual(null);
+    expect(getAspectRatioFromAttrs(img4)).toBeNull();
 
     // TODO: スタイルシートを使ったテストケースも追加する
   });
@@ -108,29 +108,29 @@ describe('getAspectRatioFromAttrs', () => {
 describe('getAspectRatioFromProps', () => {
   it('width/height プロパティからアスペクト比が計算できれば、そのアスペクト比が返る', async () => {
     const img1 = await createImg([2, 3], { style: 'width: 11px; height: 13px;' });
-    expect(getAspectRatioFromProps(img1)).toEqual(11 / 13);
+    expect(getAspectRatioFromProps(img1)).toBeCloseTo(11 / 13);
 
     const img3 = await createImg([2, 3], { width: '5', height: '7', style: 'width: 11px; height: 13px;' });
-    expect(getAspectRatioFromProps(img3)).toEqual(11 / 13);
+    expect(getAspectRatioFromProps(img3)).toBeCloseTo(11 / 13);
 
     // TODO: スタイルシートを使ったテストケースも追加する
   });
   it('width/height プロパティからアスペクト比が計算できなければ null が返る', async () => {
     const img1 = await createImg([2, 3], { style: 'width: 11px; height: auto;' });
-    expect(getAspectRatioFromProps(img1)).toEqual(null);
+    expect(getAspectRatioFromProps(img1)).toBeNull();
 
     const img2 = await createImg([2, 3], { style: 'width: 11px; height: 13%;' });
-    expect(getAspectRatioFromProps(img2)).toEqual(null);
+    expect(getAspectRatioFromProps(img2)).toBeNull();
 
     // TODO: テストを通す
     // const img3 = await createImg([2, 3], { style: 'width: 11px; height: 13vw;' });
-    // expect(getAspectRatioFromProps(img3)).toEqual(null);
+    // expect(getAspectRatioFromProps(img3)).toBeNull();
 
     const img4 = await createImg([2, 3], { style: 'width: 11px;' });
-    expect(getAspectRatioFromProps(img4)).toEqual(null);
+    expect(getAspectRatioFromProps(img4)).toBeNull();
 
     const img5 = await createImg([2, 3], { width: '5', height: '7' });
-    expect(getAspectRatioFromProps(img5)).toEqual(null);
+    expect(getAspectRatioFromProps(img5)).toBeNull();
 
     // TODO: スタイルシートを使ったテストケースも追加する
   });
@@ -139,45 +139,45 @@ describe('getAspectRatioFromProps', () => {
 describe('getAspectRatioFromComputedStyles', () => {
   it('見かけ上の寸法からアスペクト比が計算できれば、そのアスペクト比が返る', async () => {
     const img1 = await createImg([2, 3], { width: '5', height: '7', style: 'width: 11px; height: 13px;' });
-    expect(getAspectRatioFromComputedStyles(img1)).toEqual(11 / 13);
+    expect(getAspectRatioFromComputedStyles(img1)).toBeCloseTo(11 / 13);
 
     const img2 = await createImg([2, 3], { width: '5', height: '7', style: 'width: 11px;' });
-    expect(getAspectRatioFromComputedStyles(img2)).toEqual(11 / 7);
+    expect(getAspectRatioFromComputedStyles(img2)).toBeCloseTo(11 / 7);
 
     const img3 = await createImg([2, 3], { width: '5', height: '7' });
-    expect(getAspectRatioFromComputedStyles(img3)).toEqual(5 / 7);
+    expect(getAspectRatioFromComputedStyles(img3)).toBeCloseTo(5 / 7);
 
     // TODO: テストを通す
     // const img4 = await createImg([2, 3], { width: '5', height: 'auto' });
-    // expect(getAspectRatioFromComputedStyles(img4)).toEqual(2 / 3);
+    // expect(getAspectRatioFromComputedStyles(img4)).toBeCloseTo(2 / 3);
 
     // TODO: テストを通す
     // const img5 = await createImg([2, 3], { width: '5' });
-    // expect(getAspectRatioFromComputedStyles(img5)).toEqual(2 / 3);
+    // expect(getAspectRatioFromComputedStyles(img5)).toBeCloseTo(2 / 3);
 
     // TODO: テストを通す
     // const img6 = await createImg([2, 3], {});
-    // expect(getAspectRatioFromComputedStyles(img6)).toEqual(2 / 3);
+    // expect(getAspectRatioFromComputedStyles(img6)).toBeCloseTo(2 / 3);
 
     // TODO: スタイルシートを使ったテストケースも追加する
 
     const img7 = await createImg([2, 3], { style: 'width: 5vw; height: 7vw;' });
-    expect(getAspectRatioFromComputedStyles(img7)).toEqual(5 / 7);
+    expect(getAspectRatioFromComputedStyles(img7)).toBeCloseTo(5 / 7);
   });
   it('見かけ上の寸法からアスペクト比が計算できなければ null が返る', async () => {
     const img1 = await createImg([2, 3], { style: 'width: 5px; height: 7%;' });
-    expect(getAspectRatioFromComputedStyles(img1)).toEqual(null);
+    expect(getAspectRatioFromComputedStyles(img1)).toBeNull();
 
     const img2 = await createImg([2, 3], { style: 'width: 5%; height: 7%;' });
-    expect(getAspectRatioFromComputedStyles(img2)).toEqual(null);
+    expect(getAspectRatioFromComputedStyles(img2)).toBeNull();
 
     // TODO: テストを通す
     // const img3 = await createImg([2, 3], { style: 'width: 5px; height: 7vw;' });
-    // expect(getAspectRatioFromComputedStyles(img3)).toEqual(null);
+    // expect(getAspectRatioFromComputedStyles(img3)).toBeNull();
 
     // TODO: テストを通す
     // const img4 = await createImg([2, 3], { style: 'width: 5vw; height: 7vh;' });
-    // expect(getAspectRatioFromComputedStyles(img4)).toEqual(null);
+    // expect(getAspectRatioFromComputedStyles(img4)).toBeNull();
   });
 });
 
