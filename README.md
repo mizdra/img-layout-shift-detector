@@ -15,11 +15,12 @@ The browser extension that detects `<img>` tags that cause Layout Shift
 
 ## Supported Rules
 
-- [missing-aspect-ratio-hint](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/missing-aspect-ratio-hint.md)
-- [incorrect-aspect-ratio](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/incorrect-aspect-ratio.md)
-- [missing-all-size-attrs-or-props](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/missing-all-size-attrs-or-props.md)
-- [missing-one-side-attr](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/missing-one-side-attr.md)
-- [missing-one-side-prop](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/missing-one-side-prop.md)
+- [require-intrinsic-size](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/require-intrinsic-size.md)
+- [require-aspect-ratio-hint](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/require-aspect-ratio-hint.md)
+- [no-mismatch-of-aspect-ratio-hint](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/no-mismatch-of-aspect-ratio-hint.md)
+- [no-mismatch-of-apparent-size](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/no-mismatch-of-apparent-size.md)
+- [no-defective-attribute](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/no-defective-attribute.md)
+- [no-defective-property](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/no-defective-property.md)
 
 ## Playground
 
