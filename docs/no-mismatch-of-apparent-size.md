@@ -1,4 +1,8 @@
-## `no-mismatch-of-apparent-size`
+# `no-mismatch-of-apparent-size`
+
+If the size of an element does not match the image's original aspect ratio, the image may be distorted. This rule disallows the `<img>` tag.
+
+## Rule Details
 
 :no_good: Examples of **incorrect** code for this rule:
 

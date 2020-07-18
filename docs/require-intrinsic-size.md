@@ -1,4 +1,8 @@
-## `require-intrinsic-size`
+# `require-intrinsic-size`
+
+If you omit attributes and properties, or specify `width=auto`, the intrinsic size of the image is set to the img tag dimensions. However, the browser does not know the intrinsic size of the image until the image is downloaded. Thus, a layout shift occurs when downloading the image. Therefore, it is recommended to specify the intrinsic size as attributes or properties.
+
+## Rule Details
 
 :no_good: Examples of **incorrect** code for this rule:
 

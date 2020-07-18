@@ -25,12 +25,12 @@ The browser extension that detects `<img>` tags that cause Layout Shift
 
 ## Supported Rules
 
-- [require-intrinsic-size](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/require-intrinsic-size.md)
-- [require-aspect-ratio-hint](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/require-aspect-ratio-hint.md)
-- [no-mismatch-of-aspect-ratio-hint](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/no-mismatch-of-aspect-ratio-hint.md)
-- [no-mismatch-of-apparent-size](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/no-mismatch-of-apparent-size.md)
-- [no-defective-attribute](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/no-defective-attribute.md)
-- [no-defective-property](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/no-defective-property.md)
+- [require-intrinsic-size](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/require-intrinsic-size.md): require image's intrinsic size as attributes or properties.
+- [require-aspect-ratio-hint](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/require-aspect-ratio-hint.md): require [aspect ratio hint](https://developer.mozilla.org/en-US/docs/Web/Media/images/aspect_ratio_mapping)
+- [no-mismatch-of-aspect-ratio-hint](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/no-mismatch-of-aspect-ratio-hint.md): disallow the `width`/`height` attributes that do not match the image's original aspect ratio
+- [no-mismatch-of-apparent-size](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/no-mismatch-of-apparent-size.md): disallow `<img>` elements whose apparent size is different from the image's original aspect ratio
+- [no-defective-attribute](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/no-defective-attribute.md): disallow `<img>` tags with only one `width`/`height` attributes
+- [no-defective-property](https://github.com/mizdra/img-layout-shift-detector/blob/master/docs/no-defective-property.md): disallow `<img>` tags with only one `width`/`height` properties
 
 ## Playground
 
