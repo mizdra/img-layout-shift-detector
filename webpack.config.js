@@ -15,7 +15,7 @@ module.exports = (env, argv) => ({
     path: distPath,
     filename: 'js/[name].js',
   },
-  devtool: argv.mode === 'development' ? 'inline-source-map' : false,
+  devtool: 'inline-source-map',
 
   module: {
     rules: [
