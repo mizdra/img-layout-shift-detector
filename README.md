@@ -51,7 +51,13 @@ $ yarn run start:chromium:dev
 $ # Wait for passing CI...
 $ git switch master
 $ git pull
+
+$ # Update version field
+$ vim manifest.json
+$ git add manifest.json
 $ yarn version
+
+$ # Publish
 $ git push --follow-tags
 $ open https://chrome.google.com/webstore/devconsole
 ```
