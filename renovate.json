@@ -1,4 +1,11 @@
 {
   "extends": ["github>hatena/renovate-config"],
-  "ignorePresets": ["github>hatena/renovate-config:schedule"]
+  "ignorePresets": ["github>hatena/renovate-config:schedule"],
+  "regexManagers": [
+    {
+      "fileMatch": ["^\\.github/workflows/[^/]+\\.ya?ml$"],
+      "matchStrings": ["uses: (?<depName>.*?)@(?<currentValue>.*?)\\s"],
+      "datasourceTemplate": "github-tags"
+    }
+  ]
 }
