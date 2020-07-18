@@ -44,3 +44,14 @@ The browser extension that detects `<img>` tags that cause Layout Shift
 $ yarn install
 $ yarn run start:chromium:dev
 ```
+
+## How to release (for contributor)
+
+```console
+$ # Wait for passing CI...
+$ git switch master
+$ git pull
+$ yarn version
+$ git push --follow-tags
+$ open https://chrome.google.com/webstore/devconsole
+```
