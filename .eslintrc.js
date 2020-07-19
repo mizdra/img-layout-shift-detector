@@ -1,4 +1,7 @@
+// @ts-check
 /* eslint-env node */
+
+/** @type import('eslint').Linter.BaseConfig */
 module.exports = {
   root: true,
   extends: ['@mizdra/mizdra', '@mizdra/mizdra/+typescript', '@mizdra/mizdra/+prettier'],
