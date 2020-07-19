@@ -1,3 +1,7 @@
+// @ts-check
+/* eslint-env node */
+
+/** @type import('eslint').Linter.BaseConfig */
 module.exports = {
   root: true,
   extends: ['@mizdra/mizdra', '@mizdra/mizdra/+typescript', '@mizdra/mizdra/+prettier'],
@@ -9,5 +13,9 @@ module.exports = {
     CSSUnitValue: 'readonly',
     CSSKeywordValue: 'readonly',
   },
-  rules: {},
+  rules: {
+    // 未使用変数の解析は非常にコストの掛かる作業のため、tsc に任せる
+    // ref: https://github.com/typescript-eslint/typescript-eslint/issues/1856
+    'no-unused-vars': 'off',
+  },
 };

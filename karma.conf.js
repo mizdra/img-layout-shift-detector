@@ -1,3 +1,4 @@
+/* eslint-env node */
 module.exports = (config) => {
   config.set({
     frameworks: ['jasmine', 'karma-typescript'],

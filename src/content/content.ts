@@ -58,4 +58,4 @@ import { waitImgsLoad } from './wait';
     imgs.filter(verifyNoDefectiveProperty),
     DEFAULT_LOG_LEVEL['no-defective-property'],
   );
-})();
+})().catch(console.error);
