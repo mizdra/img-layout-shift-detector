@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/mizdra/img-layout-shift-detector#readme",
   "dependencies": {
-    "webextension-polyfill-ts": "^0.19.0"
+    "webextension-polyfill-ts": "^0.20.0"
   },
   "devDependencies": {
     "@mizdra/eslint-config-mizdra": "^0.5.0",
