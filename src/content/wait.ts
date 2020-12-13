@@ -1,11 +1,11 @@
 async function waitRaf() {
-  return new Promise((resolve) => {
+  return new Promise<void>((resolve) => {
     requestAnimationFrame(() => resolve());
   });
 }
 
 async function waitDuration(ms: number) {
-  return new Promise((resolve) => {
+  return new Promise<void>((resolve) => {
     setTimeout(() => resolve(), ms);
   });
 }
