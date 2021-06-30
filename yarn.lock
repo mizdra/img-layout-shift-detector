@@ -276,10 +276,10 @@
   dependencies:
     extend "3.0.2"
 
-"@mizdra/eslint-config-mizdra@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@mizdra/eslint-config-mizdra/-/eslint-config-mizdra-0.5.0.tgz#538b536e07991768f4772dd89c3d732050b4719a"
-  integrity sha512-FSK3iU+QarR5YlDd0VfFFgt2AIjju0xcPe19P6Xy++FFMShPXeTNNxGkKQ7Y1pcbVl5rWy1P1ZqnWKWlbPEBig==
+"@mizdra/eslint-config-mizdra@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@mizdra/eslint-config-mizdra/-/eslint-config-mizdra-0.8.0.tgz#fb30a43c91318f23de46dde582291a2b32f4a6aa"
+  integrity sha512-1CzMOb6rOVZcufWfyRp8SkrKyFLvdTE6z5tKNtMlhCas3UzY7ETHePsdhxHHi/f84HgZuEQsQp7hi0j/aBbqvA==
 
 "@nodelib/fs.scandir@2.1.3":
   version "2.1.3"
