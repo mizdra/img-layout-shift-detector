@@ -117,12 +117,12 @@ export function getSizeInfo(img: HTMLImageElement): SizeInfo {
   const computedWidthStyle = img.computedStyleMap().get('width');
   const computedHeightStyle = img.computedStyleMap().get('height');
   return {
-    attrs: {
+    'attrs': {
       width: img.getAttribute('width'),
       height: img.getAttribute('height'),
       aspectRatio: getAspectRatioFromAttrs(img),
     },
-    props: {
+    'props': {
       width: widthProp ? widthProp.toString() : null,
       height: heightProp ? heightProp.toString() : null,
       aspectRatio: getAspectRatioFromProps(img),
