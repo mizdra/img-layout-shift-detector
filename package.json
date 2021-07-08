@@ -30,11 +30,14 @@
     "url": "https://github.com/mizdra/img-layout-shift-detector/issues"
   },
   "homepage": "https://github.com/mizdra/img-layout-shift-detector#readme",
+  "prettier": "@mizdra/prettier-config-mizdra",
+  "renovate": "github>mizdra/renovate-config-mizdra",
   "dependencies": {
     "webextension-polyfill-ts": "^0.25.0"
   },
   "devDependencies": {
     "@mizdra/eslint-config-mizdra": "^0.5.0",
+    "@mizdra/prettier-config-mizdra": "^0.3.0",
     "@types/jasmine": "^3.7.7",
     "@types/webpack": "^4.41.29",
     "@typescript-eslint/eslint-plugin": "^4.28.1",
