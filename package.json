@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/mizdra/img-layout-shift-detector#readme",
   "prettier": "@mizdra/prettier-config-mizdra",
-  "renovate": "github>mizdra/renovate-config-mizdra",
+  "renovate": "github>mizdra/renovate-config-mizdra:default.json5",
   "dependencies": {
     "webextension-polyfill-ts": "^0.25.0"
   },
